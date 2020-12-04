@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="h-100">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/all.css" rel="stylesheet">
+    <link href="./css/showtime.css" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100 bg-light">
+    <div class="nav-scroller bg-white shadow-sm">
+        <nav class="nav nav-underline">
+            <p class="nav-header nav-link active">Showtime Dashboard</p>
+            <p class="nav-link">System:</p>
+            <div class="nav-badge">
+                <span id="badge-system" class="badge badge-danger">Disabled</span>
+            </div>
+            <!--p class="nav-link">Speaker:</p>
+            <div class="nav-badge">
+                <span id="badge-speaker" class="badge badge-secondary">None</span>
+            </div-->
+            <p class="nav-link" style="padding-right: .5rem">Time:</p>
+            <div id="progress-bar" class="progress nav-bar">
+                <div id="progress-bar-time" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+            </div>
+            <div class="nav-badge pl-1">
+                <span id="badge-time" class="badge badge-primary">Wait</span>
+            </div>
+        </nav>
+    </div>
+    <main role="main" class="container">
+        <div class="my-3 px-3 py-2 bg-white rounded shadow-sm">
+            <h6 class="border-bottom border-gray pb-2 mb-0">Control</h6>
+            <div class="row h-100">
+                <div class="col-md-auto">
+                    <div class="d-flex flex-column justify-content-center align-items-center pb-3 h-100">
+                        <span id="badge-state" class="badge badge-danger mb-1 mt-3">Disabled</span>
+                        <div class="card card-preview bg-light m-1 p-auto" style="width: 15rem; height: 8rem;">
+                            <div class="card-body text-center">
+                                <span id="badge-speaker" class="badge badge-secondary mb-1 mt-2">None</span>
+                                <h1 id="text-time" class="font-weight-normal">00:00</h1>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="btn-group btn-group-sm">
+                                <button id="btn-decrease" type="button" class="btn btn-secondary mr-2" onclick="sendCommand('modify', -10, 'amount')">
+                                    <i class="fas fa-minus small"></i>
+                                </button>
+                                <button id="btn-playback" type="button" class="btn btn-success" onclick="sendCommand('start', null)">
+                                    <i class="fas fa-play small"></i>
+                                </button>
+                                <button id="btn-stop" type="button" class="btn btn-danger" onclick="sendCommand('stop', null)">
+                                    <i class="fas fa-stop small"></i>
+                                </button>
+                                <button id="btn-increase" type="button" class="btn btn-secondary ml-2" onclick="sendCommand('modify', 10, 'amount')">
+                                    <i class="fas fa-plus small"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="list-candidate" class="candidate-group btn-group-vertical input-group-sm btn-group-toggle col-md-auto p-2"
+                    data-toggle="buttons">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-center pl-3" style="width: 6rem">Candidate</span>
+                    </div>
+                    <label id="btn-candidate-none" class="btn btn-secondary btn-sm active" onclick='sendCommand("candidate", -1, "candidate")'>
+                        <input id="btn-candidate-none-radio" type="radio" name="candidates" checked>
+                        <a id="btn-candidate-none-name">None</a>
+                    </label>
+                    
+                    <label id="btn-candidate-custom" class="btn btn-success btn-sm" onclick='sendCommand("candidate", 0, "candidate")'>
+                        <input id="btn-candidate-custom-radio" type="radio" name="candidates">
+                        <a id="btn-candidate-custom-name">Custom</a>
+                    </label>
+                </div>
+
+                <div class="col p-2">
+                    <div class="d-flex flex-column justify-content-center align-items-center h-100">
+                        <div class="input-group input-group-sm pt-1 pb-2">
+                            <div class="input-group-prepend" style="width: 3rem">
+                                <span class="input-group-text pr-3">Bell</span>
+                            </div>
+                            <div class="btn-group">
+                                <button id="btn-bell-force" type="button" class="btn btn-warning btn-sm" onclick="sendCommand('bell', null);">Ring Bell</button>
+                                <button id="btn-bell-mode" type="button" class="btn btn-secondary btn-sm" onclick='sendCommand("changeprop", "\"bell\"", "prop");'>Mode</button>
+                            </div>
+                            <div class="input-group-append">
+                                <span id="badge-bell" class="input-group-text alert-success">Auto</span>
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm pt-1 pb-2">
+                            <div class="input-group-prepend" style="width: 3rem">
+                                <span class="input-group-text">State</span>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-danger btn-sm active" style="width: 3rem" onclick='sendCommand("state", "\"idle\"", "state")'>
+                                    <input type="radio" name="state" id="option1" autocomplete="off" checked> Idle
+                                </label>
+                                <label class="btn btn-secondary btn-sm" style="width: 6rem" onclick='sendCommand("state", "\"countdown\"", "state")'>
+                                   <input type="radio" name="state" id="option2" autocomplete="off"> Countdown
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm pt-1 pb-2">
+                            <div class="input-group-prepend" style="width: 3rem">
+                                <span class="input-group-text">Time</span>
+                            </div>
+                            <div class="input-group input-group-sm mt-auto" style="width: 3rem">
+                                <input id="text-totaltime" type="text" class="form-control" placeholder="s">
+                            </div>
+                            <div class="input-group-append">
+                                <button id="btn-totaltime" type="button" class="btn btn-secondary btn-sm" onclick='changeTotalTime();'>Set</button>
+                            </div>
+                            <div class="input-group-append">
+                                <button id="btn-totaltime" type="button" class="btn btn-secondary btn-sm btn-warning" onclick='changeTotalTime(); sendCommand("stop", null);'>Set & Reset</button>
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm pt-3 pb-2">
+                            <div class="input-group-prepend" style="width: 4rem">
+                                <span class="input-group-text">Custom</span>
+                            </div>
+                            <div class="input-group input-group-sm mt-auto" style="width: 6rem">
+                                <input id="text-custom" type="text" class="form-control" placeholder="Text">
+                            </div>
+                            <div class="input-group-append">
+                                <button id="btn-totaltime" type="button" class="btn btn-secondary btn-sm btn-warning" onclick=''>Set</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="my-3 px-3 pt-2 pb-1 bg-white rounded shadow-sm">
+            <div class="d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-primary btn-sm my-1 ml-1 mr-3" data-toggle="modal"
+                    data-target="#setupModal">Setup</button>
+                <button type="button" class="btn btn-secondary btn-sm m-1" data-toggle="modal"
+                    data-target="#generalModal">General</button>
+                <button type="button" class="btn btn-secondary btn-sm m-1" data-toggle="modal"
+                    data-target="#networkModal">Network</button>
+            </div>
+        </div>
+    </main>
+    <footer class="footer mt-auto">
+        <div class="nav-scroller bg-white shadow-sm">
+            <nav class="nav nav-underline pl-3">
+                <p id="status-text" class="nav-link">Server:</p>
+                <div class="nav-badge">
+                    <span id="badge-ip" class="badge badge-secondary">Disabled</span>
+                </div>
+                <p id="speaker-text" class="nav-link">Connections:</p>
+                <div class="nav-badge">
+                    <span id="badge-connections" class="badge badge-secondary">None</span>
+                </div>
+            </nav>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="setupModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Setup</h6>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mx-1">
+                        <small>File:</small>
+                        <span id="badge-setup-file" class="badge badge-primary ml-1">None</span>
+                    </div>
+                    <div class="d-flex">
+                        <div class="mx-1">
+                            <small>Candidates:</small>
+                            <span id="badge-setup-candidates" class="badge badge-primary ml-1">None</span>
+                        </div>
+                        <div class="mx-1">
+                            <small>Version:</small>
+                            <span id="badge-setup-version" class="badge badge-secondary ml-1">None</span>
+                        </div>
+                        <div class="mx-1">
+                            <small>Timestamp:</small>
+                            <span id="badge-setup-timestamp" class="badge badge-success ml-1">None</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="generalModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel">General Settings</h6>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <small class="m-0">Splash</small>
+                    <div class="input-group input-group-sm pt-1 pb-2" style="width: 8rem">
+                        <div class="input-group-prepend" style="width: 4rem">
+                            <span class="input-group-text pr-3">Ch-Del</span>
+                        </div>
+                        <input id="text-ch-del" type="text" class="form-control">
+                        <div class="input-group-append" style="width: 1rem">
+                            <span class="input-group-text pr-3">s</span>
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm pt-1 pb-2">
+                        <div class="input-group-prepend" style="width: 4.5rem">
+                            <span class="input-group-text pr-3">Rnd-Disp</span>
+                        </div>
+                        <div class="btn-group">
+                            <button id="btn-rnd-disp-mode" type="button" class="btn btn-secondary btn-sm">Mode</button>
+                        </div>
+                        <div class="input-group-append">
+                            <span id="badge-rnd-disp" class="input-group-text alert-success">On</span>
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm pt-1 pb-2">
+                        <div class="input-group-prepend" style="width: 4.5rem">
+                            <span class="input-group-text pr-3">Pictures</span>
+                        </div>
+                        <div class="btn-group">
+                            <button id="btn-pictures-mode" type="button" class="btn btn-secondary btn-sm">Mode</button>
+                        </div>
+                        <div class="input-group-append">
+                            <span id="badge-pictures" class="input-group-text alert-success">On</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="networkModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Network</h6>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex">
+                        <div class="mr-1">
+                            <small>IP:</small>
+                            <span id="badge-ip" class="badge badge-primary">None</span>
+                        </div>
+                        <div class="mx-1">
+                            <small>Connections:</small>
+                            <span class="badge badge-success">None</span>
+                        </div>
+                        <div class="mx-1">
+                            <small>Latency:</small>
+                            <span id="badge-latency" class="badge badge-secondary">None</span>
+                        </div>
+                    </div>
+                    <small class="mt-2">Clients:</small>
+                    <ul id="list-clients" class="list-group">
+                        <li id="list-client-1" class="list-group-item px-1 py-0">
+                            <small id="list-client-1-ip">127.0.0.1</small>
+                            <span id="list-client-1-connections" class="badge badge-secondary font-weight-normal">1</span>
+                        </li>
+                        <li class="list-group-item px-1 py-0">
+                            <small>127.0.0.1</small>
+                            <span class="badge badge-secondary font-weight-normal">1</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/control.js"></script>
+</body>
+
+</html>

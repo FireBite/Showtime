@@ -1,0 +1,19 @@
+{
+    "file_version": "0.1",
+    "file_name": "err",
+    "file_timestamp": "err",
+    "net_ip": "127.0.0.1",
+    "candidate_amount": "3",
+    "candidate_list": {
+      "1": "Kamila Grudniewska",
+      "2": "Jan Róg",
+      "3": "Ola Taran"
+    },
+
+    "candidate_current": -1,
+    "candidate_customtext": "",
+    
+    "splash_delay": 5000,
+    "splash_rnd": true
+  }
+  

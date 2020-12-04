@@ -1,0 +1,18 @@
+{
+    "file_version": "0.1",
+    "file_name": "err",
+    "file_timestamp": "err",
+    "net_ip": "127.0.0.1",
+    "candidate_amount": "2",
+    "candidate_list": {
+      "1": "Anna Pocztowska",
+      "2": "Filip Gawlik"
+    },
+
+    "candidate_current": -1,
+    "candidate_customtext": "",
+    
+    "splash_delay": 5000,
+    "splash_rnd": false
+  }
+  

@@ -1,0 +1,34 @@
+{
+  "name": "showtime",
+  "version": "1.0.0",
+  "description": "Nowodworek Presidental Debate Show Manager",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FireBite/Showtime.git"
+  },
+  "author": "Miłosz Łagan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FireBite/Showtime/issues"
+  },
+  "homepage": "https://github.com/FireBite/Showtime#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  },
+  "dependencies": {
+    "ip": "^1.1.5",
+    "node-lame": "^1.2.0",
+    "node-static": "^0.7.11",
+    "play-sound": "^1.1.3",
+    "websocket": "^1.0.30",
+    "ws": "^7.2.0"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.1",
+    "utf-8-validate": "^5.0.2"
+  }
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="h-100">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/all.css" rel="stylesheet">
+    <link href="./css/showtime.css" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100 bg-light">
+    <div class="nav-scroller bg-white shadow-sm">
+        <nav class="nav nav-underline">
+            <p class="nav-header nav-link active" href="#">Showtime Dashboard</p>
+            <p id="status-text" class="nav-link">System:</p>
+            <div class="nav-badge">
+                <span class="badge badge-danger">Disabled</span>
+            </div>
+            <p id="speaker-text" class="nav-link">Speaker:</p>
+            <div class="nav-badge">
+                <span class="badge badge-secondary">None</span>
+            </div>
+            <p class="nav-link" style="padding-right: .5rem">Time:</p>
+            <div class="progress nav-bar">
+                <div class="progress-bar" role="progressbar" style="width: 0%;"></div>
+            </div>
+            <div class="nav-badge pl-1">
+                <span class="badge badge-primary">Wait</span>
+            </div>
+        </nav>
+    </div>
+    <main role="main" class="container">
+        <div class="my-3 px-3 pt-2 pb-1 bg-white rounded shadow-sm">
+            <h6 class="border-bottom border-gray pb-2 mb-0">Control</h6>
+            <div class="row h-100">
+
+                <div class="col-md-auto">
+                    <div class="d-flex flex-column justify-content-center align-items-center bd-highlight pb-3 h-100">
+                        <span class="badge badge-danger mb-1 mt-3 bd-highligh">Disabled</span>
+                        <div class="card card-preview bg-light m-1 p-auto bd-highligh"
+                            style="width: 15rem; height: 8rem;">
+                            <div class="card-body text-center">
+                                <span class="badge badge-secondary mb-1 mt-2 bd-highligh">None</span>
+                                <h1 class="font-weight-normal">00:00</h1>
+                            </div>
+                        </div>
+                        <div class="mt-2 bd-highligh">
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-secondary mr-2">
+                                    <i class="fas fa-minus small"></i>
+                                </button>
+                                <button type="button" class="btn btn-success">
+                                    <i class="fas fa-play small"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger">
+                                    <i class="fas fa-stop small"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary ml-2">
+                                    <i class="fas fa-plus small"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group-vertical input-group-sm btn-group-toggle col-md-auto p-2" data-toggle="buttons">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-center pl-3" style="width: 6rem"
+                            id="basic-addon2">Candidate</span>
+                    </div>
+                    <label class="btn btn-secondary btn-sm active" style="width: 6rem">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> None
+                    </label>
+                    <label class="btn btn-primary btn-sm" style="width: 6rem">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> 1
+                    </label>
+                    <label class="btn btn-primary btn-sm" style="width: 6rem">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> 2
+                    </label>
+                    <label class="btn btn-primary btn-sm" style="width: 6rem">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> 3
+                    </label>
+                    <label class="btn btn-primary btn-sm" style="width: 6rem">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> 4
+                    </label>
+                    <label class="btn btn-success btn-sm" style="width: 6rem">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Custom
+                    </label>
+                </div>
+
+                <div class="col p-2">
+                    <div class="d-flex flex-column justify-content-center align-items-center bd-highlight h-100">
+                        <div class="input-group input-group-sm pt-1 pb-2">
+                            <div class="input-group-prepend" style="width: 3rem">
+                                <span class="input-group-text pr-3" id="basic-addon2">Bell</span>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-warning btn-sm">Ring Bell</button>
+                                <button type="button" class="btn btn-secondary btn-sm">Mode</button>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text alert-success" id="basic-addon2">Auto</span>
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm pt-1 pb-2">
+                            <div class="input-group-prepend" style="width: 3rem">
+                                <span class="input-group-text pr-3" id="basic-addon2">A-Sw</span>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success btn-sm">Next</button>
+                                <button type="button" class="btn btn-warning btn-sm">Force</button>
+                                <button type="button" class="btn btn-secondary btn-sm">Mode</button>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text alert-success" id="basic-addon2">Auto</span>
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm pt-1 pb-2">
+                            <div class="input-group-prepend" style="width: 3rem">
+                                <span class="input-group-text" id="basic-addon2">State</span>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-danger btn-sm active" style="width: 3rem">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Idle
+                                </label>
+                                <label class="btn btn-secondary btn-sm" style="width: 6rem">
+                                    <input type="radio" name="options" id="option2" autocomplete="off"> Countdown
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm pt-3 pb-2">
+                            <div class="input-group-prepend" style="width: 4rem">
+                                <span class="input-group-text" id="basic-addon2">Custom</span>
+                            </div>
+                            <div class="input-group input-group-sm mt-auto" style="width: 6rem">
+                                <input type="text" class="form-control" placeholder="Text">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+    <footer class="footer mt-auto">
+        <div class="nav-scroller bg-white shadow-sm">
+            <nav class="nav nav-underline pl-3">
+                <p id="status-text" class="nav-link">Server:</p>
+                <div class="nav-badge">
+                    <span class="badge badge-secondary">Disabled</span>
+                </div>
+                <p id="speaker-text" class="nav-link">Connections:</p>
+                <div class="nav-badge">
+                    <span class="badge badge-secondary">None</span>
+                </div>
+                <p id="speaker-text" class="nav-link">Latency:</p>
+                <div class="nav-badge">
+                    <span class="badge badge-secondary">None</span>
+                </div>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/showtime.js"></script>
+    <script src="./js/header.js"></script>
+</body>
+
+</html>
